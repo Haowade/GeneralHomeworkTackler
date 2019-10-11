@@ -1,5 +1,5 @@
 from molmass import Formula
-RawData = input("1st gas Formula, mass, 2nd Formula, mass, T, V: ")
+RawData = input("1st gas Formula, mass(g), 2nd Formula, mass(g), T(C), V(L): ")
 while(RawData != "quit"):
     SplitData = RawData.split(" ")
     if(len(SplitData) == 1):

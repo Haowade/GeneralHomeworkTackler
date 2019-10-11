@@ -15,7 +15,7 @@ while(RawData != "quit"):
     OtoCRatio = Omol / Cmol
     EmpiricalMr = HtoCRatio * Formula("H").mass + Formula("C").mass + OtoCRatio * Formula("O").mass
     Coefficient = round(Mr/EmpiricalMr,0)
-    print("C","H", int(round(HtoCRatio,0)), "O",int(round(OtoCRatio,0) ))
+    print("C","H", int(round(HtoCRatio,3)), "O",int(round(OtoCRatio,3) ))
     print("C",int(Coefficient),"H", int(round(Coefficient*HtoCRatio,0)), "O",int(Coefficient*round(OtoCRatio,0)))
 
 
