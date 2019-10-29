@@ -96,7 +96,7 @@
     Then there exist coefficients:
     \begin{align}
         \{A_k\}_{k = 0}^{\infty}, \{B_k\}_{k = 0}^{\infty}\\
-        x(t) &= \frac{A_0}{2} + \sum_{k=0}^{\infty}\left( A_k cos(2 \pi f_0 k t) + A_k sin(2 \pi f_0 k t)\right), \forall t
+        x(t) &= \frac{A_0}{2} + \sum_{k=0}^{\infty}\left( A_k cos(2 \pi f_0 k t) + B_k sin(2 \pi f_0 k t)\right), \forall t
     \end{align}
     Calculating $\{A_k\}, \{B_k\}$ starting from $x(t)$
     It can be shown that:
@@ -189,5 +189,116 @@
         \item Arbitrary continuous functions cannot be represented in practice and cannot be stored in computer
         \item The involved integrals cannot be computed in general
     \end{enumerate}
+    \subsubsection{Fourier Transform summary}
+    Let $x(t) = x(t + T_0)$ be a periodic signal with period $T_0$, then there exist coefficients $\{A_k\}_{k = 0}^{\infty},\; \{B_k\}_{k = 0}^{\infty}$ such that
+    \begin{align}
+        x(t) &= \frac{A_0}{2} + \sum_{k=0}^{\infty}\left( A_k cos(2 \pi f_0 k t) + B_k sin(2 \pi f_0 k t)\right), \forall t\\
+        A_0 &= \frac{2}{T_0} \int_{-0.5T_0}^{0.5T_0} x(t)dt\\
+        A_k &= \frac{2}{T_0} \int_{-0.5T_0}^{0.5T_0} x(t)cos(2\pi kt)dt\\
+        B_k &= \frac{2}{T_0} \int_{-0.5T_0}^{0.5T_0} x(t)sin(2\pi kt)dt\\
+        &or \nonumber\\
+        s(t) &= \frac{A_0}{2} \sum_{k=1}^{\infty} C_k cos(2 \pi f_0t + \phi_k)\\
+        &where \nonumber\\
+        C_k &= \sqrt{A_k^2 + B_k^2} and \phi_k = tan^{-1}(\frac{B}{A})
+    \end{align}
+    A spectrum of a periodic signal is the collection of amplitude, 
+    frequency and phase information that allows us to represent the signal as a linear combination
+    $A_0$ is the DC part of the signal
+    Think of the integral as a Riemannian sum, that is, 
+    the average of signal over a period
+
+    \subsection{Complex number involved in fourier transform}
+
+    Complex number are an elegant way of expressing rotations, something periodic.
+
+    \begin{align}
+        Euler's\;&Formula \nonumber\\
+        &R(cos(\theta) + i sin(\theta)) \;(or Rcis(\theta)) \equiv Re^{i\theta}\\\nonumber
+    \end{align}
+
+    Adding two complex number
+
+    \begin{align}
+        z &= a + bi\\
+        z_1 &= a_1 + b_1i\\
+        z + z_1 &= a + a_1 + b + b_1i
+    \end{align}
+
+    We can easily understand the concept of multiplication and division using Euler's formula
+
+    \begin{align}
+        z &= R e^{i\theta}\\
+        z_1 &= R_1 e^{i\theta_1}\\
+        z \times z_1 &= R \times R_1 \times e^{i(\theta + \theta_1)}
+    \end{align}
+
+    A conjugate of an imaginary number is an symmetric image of itself by the $x$-axis
+
+    \begin{align}
+        z &= a + bi\\
+        z* &= a - bi\\
+        z \times z* &= a^2 + b^2\\
+        \Re(z) &= \frac{z + z*}{2}\\
+        \Im(z) &= \frac{z - z*}{2i}
+    \end{align}
+
+    hence 
+
+    \begin{align}
+        cos(\theta) &= \frac{e^{i\theta} + e^{-i\theta}}{2}\\
+        sin(\theta) &= \frac{e^{i\theta} - e^{-i\theta}}{2i}\\\nonumber
+    \end{align}
+
+    \subsubsection{Complex Exponential Signal}
+
+    We can use the conclusion above to express a signal with an complex exponential signal
+    \begin{align}
+        z(t) &= Ae^{2 \pi f_0 t + \phi}
+    \end{align}
+    Where $A$ is the magnitude and $\omega_0 + \phi$ is the angle linearly variating in time 
+
+    We can plot an complex exponential signal spectrum for any given signal by seperating them into real part and imaginary part
+    \begin{align}
+        let\; x(t) &= 10 + 14 cos(200 \pi t - \frac{\pi}{3}) + 8 cos(500 \pi t + \pi/2)\\
+        x(t) &= 10 + 7e^{-\frac{j\pi}{3}} e^{2j\pi(100)t} + 7e^{\frac{j\pi}{3}} e^{-2j\pi(100)t}\\
+        &\;\;\;\; + 4e^{\frac{j\pi}{2}} e^{2j\pi(250)t} + 4e^{-\frac{j\pi}{2}} e^{2j\pi(250)t} \nonumber
+    \end{align}
+
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[->] (-4,0) -- (4,0) node[right] {$f/Hz$};
+            \draw[->] (0,-1) -- (0,3.6) node[above] {$A/m$};
+            \draw[ultra thick, black] (0,0) node[below] {$\;\;\;0$} -- (0,3) node[right] {$10$};
+            \draw[ultra thick, black] (1,0) node[below] {$100$} -- (1,2.1) node[above] {$7e^{-\frac{j\pi}{3}}$};
+            \draw[ultra thick, black] (2.5,0) node[below] {$250$} -- (2.5,1.2) node[above] {$4e^{\frac{j\pi}{2}}$};
+            \draw[ultra thick, black] (-1,0) node[below] {$-100$} -- (-1,2.1) node[above] {$7e^{\frac{j\pi}{3}}$};
+            \draw[ultra thick, black] (-2.5,0) node[below] {$-250$} -- (-2.5,1.2) node[above] {$4e^{-\frac{j\pi}{2}}$};
+        \end{tikzpicture}
+    \end{center}
+
+    Multiplying something by $i$ jas an effect of rotating that something by 90 degrees. 
+    Using euler's formula, we can express any unit-length complex number as $e ^ {(2 \pi i t)}$
+    Where $t$ is a real number, if $t$ represents time, 
+    and plot the location of the complexnumber at the given time $t$.
+    What we will see is a circle being drawn with a frequency of one cycle per second($Hz$).
+    We could adjust the speed of the rotation by multiplying a frequency $f$ to the power, 
+    which gives us $e ^ {(2 \pi i f t)}$\\
+
+    Can it have negative frequencies? negative frequencies seems pretty abstract at first, 
+    but once you start to understand the idea of drawing a circle in the anti-clockwise direction,
+    you will soon realise that having negative frequencies simply implies rotating in the clockwise direction.\\
+
+    Multipying the circle by a function $f(t)$ would then suggest wrapping the function around the circle,
+    By taking the mean, finding the center of mass of the wrapped signal, at different time t with an integral, we can plot a diagram of the spectrum.
+    When it all lined up, there will be an obvious peak. where the center of mass is shiped the farthest away from the signal.
+
+    So the complex version of fourier integrals is:
+
+    \begin{align}
+        x_k &= \frac{1}{T_0} \int_{0}^{T_0} x(t) e^{-j 2 \pi f_0 kt}
+    \end{align}
+
+
+
    
 \end{document}
