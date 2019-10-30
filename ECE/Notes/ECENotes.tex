@@ -4,17 +4,21 @@
 \usepackage{amsfonts}
 \usepackage{titling}
 \usepackage{tikz}
+\usepackage{hyperref}
 %\setlength{\droptitle}{-12em}
 \title{ECE, Signal Processing}
 
 \begin{document}
 \maketitle
-\section[]{Sinusoidal Signals}
+\newpage
+\tableofcontents
+\newpage
+\section{Sinusoidal Signals}
     \begin{enumerate}
         \item Sinusoidal signals are the basic building blocks in the theory of signals \& systems
         \item Arise as soutions to differential equations that through the laws of physics, describe common physical phenomena
     \end{enumerate}
-    \subsection[]{Mathematical Formula}
+    \subsection{Mathematical Formula}
     let a signal be $s(t)$, where t represents the time t of a given time, we have:
     \begin{align}
         s(t) &= A cos(2 \pi f_0 + \phi)
@@ -42,7 +46,7 @@
     \begin{align}
         \text{Period } T_0 &= \frac{1}{f_0}
     \end{align}
-    \subsection[]{Periodic Signals}
+    \subsection{Periodic Signals}
     A periodic signal persists for an infinity amount of time, and will always output the same waveform in any integer multiples of periods
 
     \begin{align}
@@ -75,7 +79,7 @@
         cos(P) - cos(Q) &\equiv -2 sin (\frac{1}{2}(P + Q)) sin (\frac{1}{2}(P - Q))\\
     \end{align}
 
-    \subsection[]{Harmonics}
+    \subsection{Harmonics}
     Lets say we have Harmonic Frequencies $f_k, k \in \mathbb{Z}$
     \begin{align}
         x_1(t) &= cos(2 \pi f_1 + \phi)\\
@@ -90,7 +94,7 @@
         s(t + T_0) =& \sum_{k=1}^{N} A_k cos(2 \pi f_0 t + 2 \pi k + \phi_k)\\
         \text{hence: } s(t + T_0) =& s(t)\\
     \end{align}
-    \subsection[]{Fourier Series}
+    \subsection{Fourier Series}
     We can express any arbitrary periodic signal as a sum of harmonic sinusoids,
     let $x(t) = x(t + T_0)$ be a periodic signal with period $T_0$\\
     Then there exist coefficients:
@@ -189,7 +193,7 @@
         \item Arbitrary continuous functions cannot be represented in practice and cannot be stored in computer
         \item The involved integrals cannot be computed in general
     \end{enumerate}
-    \subsubsection{Fourier Transform summary}
+    \subsection{Fourier Transform summary}
     Let $x(t) = x(t + T_0)$ be a periodic signal with period $T_0$, then there exist coefficients $\{A_k\}_{k = 0}^{\infty},\; \{B_k\}_{k = 0}^{\infty}$ such that
     \begin{align}
         x(t) &= \frac{A_0}{2} + \sum_{k=0}^{\infty}\left( A_k cos(2 \pi f_0 k t) + B_k sin(2 \pi f_0 k t)\right), \forall t\\
