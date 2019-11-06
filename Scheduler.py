@@ -2,6 +2,8 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import math
 
+# CMPSC 16, TR, 1530-1645, CMPSC-s, M, 1300-1350, MATH 4B, TR, 1400-1515, Math-S, M, 1900-1950, ECE 5, MW, 1530-1645, ECE-s, T, 1700-1950, LING 3C, MW, 1700-1850, PHY 1, MW, 1400-1515, Phy-s, R, 1700-1850
+
 global DataSet
 XLim = 0
 DataSet = 0
@@ -62,7 +64,7 @@ def DrawData(CourseName, WeekDays, Times):
     plt.yticks(range(600,2500,100))
 
     ax.set_xlim((0, XLim))
-    ax.set_ylim((2100, 700))
+    ax.set_ylim((2100, 1300))
 
     #plt.show()
 
