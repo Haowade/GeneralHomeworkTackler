@@ -294,13 +294,69 @@
 
     Multipying the circle by a function $f(t)$ would then suggest wrapping the function around the circle,
     By taking the mean, finding the center of mass of the wrapped signal, at different time t with an integral, we can plot a diagram of the spectrum.
-    When it all lined up, there will be an obvious peak. where the center of mass is shiped the farthest away from the signal.
+    When it all lined up, there will be an obvious peak. where the center of mass is shiped the farthest away from the signal.\\
 
     So the complex version of fourier integrals is:
 
     \begin{align}
         x_k &= \frac{1}{T_0} \int_{0}^{T_0} x(t) e^{-j 2 \pi f_0 kt}
     \end{align}
+
+\section{Discrete Signals}
+    \subsection{Aliasing}
+    Aliasing in the context of signal processing is simply the same name of two signals. 
+    When sampling a signal at a certain frequency, multiple signals at different frequency can produce the same signal
+    For, example: $\hat{\omega} + 2\pi l$ and $2\pi l - \hat{\omega}$ are aliases of $\hat{\omega}$
+    as they are different discrete times signals defining the same signal values
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[->,ultra thick, black] (-1,0) -- (4,0) node[right] {$t$};
+            \draw[->,ultra thick, black] (0,-1) -- (0,3) node[above] {$A/m$};
+            \draw[gray] (-1,-1) grid (4,3);
+            \draw [domain=0:4, samples=50,dashed] plot (\x, {1.5+cos(pi*\x r)});
+            \draw [domain=0:4, samples=100] plot (\x, {1.5+cos(pi*\x*3 r)});
+            \draw[dotted, ultra thick, black] (0.5,0) -- (0.5,1.5);
+            \draw[dotted, ultra thick, black] (1.0,0) -- (1.0,0.5);
+            \draw[dotted, ultra thick, black] (1.5,0) -- (1.5,1.5);
+            \draw[dotted, ultra thick, black] (2.0,0) -- (2.0,2.5);
+            \draw[dotted, ultra thick, black] (2.5,0) -- (2.5,1.5);
+            \draw[dotted, ultra thick, black] (3.0,0) -- (3.0,0.5);
+            \draw[dotted, ultra thick, black] (3.5,0) -- (3.5,1.5);
+        \end{tikzpicture}
+    \end{center}
+    As you can see from the diagram above, the two signal, both sampled at 2 Hz, 
+    produced the same value each sample, but are fundamentally, two different frequencies\\
+
+    The principle alias is the frequency in $[0, \pi]$
+
+    \begin{align}
+        \hat{\omega}\; &\hat{\equiv}\; \omega_0 T_s = \frac{\omega_0}{f_s}
+    \end{align}
+
+    Fix a discrete sinusioid of discrete-time frequency $\hat{\omega}$, then the frequency $f_0$ of the original continuous
+    time sinusoid could have been any of the following:
+
+    \begin{align}
+        f_0 = (\frac{\hat{\omega}}{2\pi})f_S \;\text{or}\; f_0 = (\frac{\hat{\omega}}{2\pi})f_S + lf_s \;\text{or}\; f_0 =  lf_s - (\frac{\hat{\omega}}{2\pi})f_s \; where l \in \mathbb{Z}
+    \end{align}
+
+    We cannot know which one of them is the true signal, unless we can fix more conditions
+
+    \subsubsection{Sampling sinusoids}
+
+    Take a sample of $x[n] = cos(0.4 \pi n)$, and is equivalent to $x_2[n] = cos(2.4 \pi n)$. An alias corresponding to the principal alias , by convention, is used.
+    Once the name is fixed and $f_s$ is known, we canguarantee that the samples came from 
+    \begin{align}
+        x[n] &=\; cos(0.4 \pi n) \;\text{since}\; \hat{\omega} \in [0,\pi] \\
+        \implies \omega_0 &=  \hat{\omega} f_s \in [0,\pi \times f_s]\\
+        \implies f_0 &= \frac{f_0}{2\pi} \in [0, \frac{f_s}{2}]
+    \end{align}
+
+    If the frequency of the original continuous time signal does not satisfy the condition mentioned above, 
+    then the resulting samples are identical to those obtained by sampling a lower frequency signal. So When
+    $f_0 \notin [0, \frac{f_s}{2}]$, aliasing occurs.
+    
+    
 
 
 
