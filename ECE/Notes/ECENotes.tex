@@ -355,10 +355,41 @@
     If the frequency of the original continuous time signal does not satisfy the condition mentioned above, 
     then the resulting samples are identical to those obtained by sampling a lower frequency signal. So When
     $f_0 \notin [0, \frac{f_s}{2}]$, aliasing occurs.
-    
-    
 
+    Example:
 
+    Continuous-time signal $x(t) = cos(2\pi (100) t)$ with sampling frequency $f_s = 500 Hz$. 
+
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[->] (-4,0) -- (4,0) node[right] {$f/Hz$};
+            \draw[->] (0,-1) -- (0,3.6) node[above] {$A/m$};
+            \draw[ultra thick, black] (2,0) node[below] {$100$} -- (2,2) node[right] {$0.5$};
+            \draw[ultra thick, black] (-2,0) node[below] {$-100$} -- (-2,2) node[above] {$0.5$};
+        \end{tikzpicture}
+    \end{center}
+
+    The signal is baud-limited where $f_{max} = 100 Hz$. 
+    The sampling frequency is larger than the Nyquist rate$(2f_{max} = 200 Hz)$, so this is an over-sampling
+
+    \begin{align}
+        \hat{\omega} &= \frac{2\pi \times 100}{f_s} = 0.4\pi\\
+        \hat{\omega} &= 0.4 \pi + 2\pi l\\
+        \hat{\omega} &= 2\pi l - 0.4 \pi\\
+        &\text{where} l \in \mathbb{Z} \nonumber
+    \end{align}
+
+    Hence the discrete-time spectrum plot looks like:
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[->] (-4,0) -- (4,0) node[right] {$\pi \hat{\omega} / rad$};
+            \draw[->] (0,-1) -- (0,3.6) node[above] {$A/m$};
+            \draw[ultra thick, black] (0.8,0) node[below] {$0.4$} -- (0.8,2) node[right] {$0.5$};
+            \draw[ultra thick, black] (3.2,0) node[below] {$1.6$} -- (3.2,2) node[above] {$0.5$};
+            \draw[ultra thick, black] (-0.8,0) node[below] {$-0.4$} -- (-0.8,2) node[right] {$0.5$};
+            \draw[ultra thick, black] (-3.2,0) node[below] {$-1.6$} -- (-3.2,2) node[above] {$0.5$};
+        \end{tikzpicture}
+    \end{center}
 
    
 \end{document}
